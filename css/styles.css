@@ -80,6 +80,10 @@ h2 {
 	font-weight: bold;
 }
 
+.table td, th{
+	text-align: center;
+}
+
 .footer {
 	position: fixed;
 	left: 0;

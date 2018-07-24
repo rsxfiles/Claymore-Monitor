@@ -11,35 +11,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
     <link href="css/styles.css" rel="stylesheet">
     
     <!-- Function to get the JSON DATA from the Rig Mining -->
     <script>
        $(document).ready(function () {
- 
-      var displayResources = $('#display-resources');
-       
-       displayResources.text('Loading data from JSON source...');
-       
-       $.ajax({
-       type: "POST",
-       url: "http://localhost/rig/resources.json",
-       dataType: 'jsonp',
-       success: function(result)
-       {
-         console.log(result);
-         var output="<table><thead><tr><th>Name</th><th>Provider</th><th>URL</th></thead><tbody>";
-         for (var i in result)
-         {
-            output+="<tr><td>" + result[i].name + "</td><td>" + result[i].provider + "</td><td>" + result[i].url + "</td></tr>";
-         }
-         output+="</tbody></table>";
-         
-         displayResources.html(output);
-         $("table").addClass("table");
-       }
-       });
-     });
+          $("#updateRig").click(function() {
+            var ip = $('#ip').val();
+            var port = $('#port').val();
+            updateRig(ip,port);
+          });
+      });
     </script>
 
         
@@ -55,8 +38,29 @@
 
    <div class="container">
           
-          <!-- METRICS -->
-        
+          <!-- INPUT DATA -->
+
+    <div class="col-sm-6 col-xs-10 col-xs-offset-1">
+      <div class="form-row">
+        <div class="col-sm-12">
+          <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">Ip Address:</span>
+            </div>
+            <input type="text" class="form-control  seginput" placeholder="xxx.xxx.xxx.xxx" maxlength="15" size="15" id="ip">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">Port:</span>
+            </div>
+            <input type="text" class="form-control  seginput" placeholder="xxxx" maxlength="4" size="4" id="port">
+            <button class="btn btn-outline-secondary" type="button" id="updateRig">Update</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+           <!-- METRICS -->
+          
           <div class="card">
             <div class="card-header">
               <h2>Current Hash Rates</h2>
@@ -64,56 +68,26 @@
             <div class="cardBlock">
                 <div class="row">
                   <div class="col-sm-4 col-md-6">
-                    <div class="hash"> 189 <span>Mh/s</span> </div>
-                    <div class="urlETH"> us1.ethermine.org:4444 </div>
-                    
+                    <div class="hash" id="totalHr"> 0 <span>Mh/s</span> </div>
+                    <div class="urlETH" id="urlPool">  </div>
                   </div>
                   <div class="col-sm-4 col-md-3">
-                    <div class="shares"> Shares: <span>3462</span> </div>
-                    <div class="shares">Invalids: <span style="color: tomato">0</span></div>
+                    <div class="shares"> Shares: <span id="totalShares">0</span> </div>
+                    <div class="shares">Invalids: <span style="color: tomato" id="totalInvalids">0</span></div>
                   </div>
                   <div class="col-sm-4 col-md-3">
-                    <div class="uptime"> Uptime: <span>33h 34m</span></div>
+                    <div class="uptime"> Uptime: <span id="uptime">00h 00m</span></div>
                   </div>
               </div>
             </div>
          </div>
         <br>
           <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>GPU #</th>
-                  <th>ETH Hash (Mh/s)</th>
-                  <th>Temp (C)</th>
-                  <th>Fan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>GPU0</th>
-                  <td>30.15MH/S</td>
-                  <td>48F</td>
-                  <td>56%</td>
-                </tr>
-                <tr>
-                  <th>GPU1</th>
-                  <td>30.15MH/S</td>
-                  <td>48F</td>
-                  <td>56%</td>
-                </tr>
-                <tr>
-                  <th>GPU2</th>
-                  <td>30.15MH/S</td>
-                  <td>48F</td>
-                  <td>56%</td>
-                </tr>
-              </tbody>
-            </table>
+            <table class="table"><thead><tr><th>GPU #</th><th>ETH Hash (Mh/s)</th><th>Temp (C)</th><th>Fan</th></tr></thead><tbody id="gpuTable">
+              <!-- GUPs TABLE -->
+            </tbody></table>
           </div>
    </div>
-
-   <div id="display-resources"></div>
 </body>
 
 <!-- Footer -->
@@ -121,7 +95,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+      <a href="https://github.com/rsxfiles/Claymore-Monitor" target="_blank"> Edgar Quesada</a>
     </div>
     <!-- Copyright -->
 
