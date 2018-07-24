@@ -27,7 +27,7 @@ function updateRig(ipS, portS) {
 
     $.ajax({
     type: "POST",
-    url: "http://127.0.0.1/rig/getMinerData.php",
+    url: "getMinerData.php",
     data: {ip:ipS, port:portS},
     dataType: 'json',
     success: function(result)
