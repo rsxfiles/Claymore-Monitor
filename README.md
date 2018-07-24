@@ -6,3 +6,4 @@ This project contains is a Monitor for a Mining Rig with Claymore. It is fully r
 * Fully responsive
 * Comes with Bootstrap grid system
 * Use an apache server.
+* You have tu use al IP and PORT valids with a real Claymore working. 
