@@ -6,4 +6,4 @@ This project contains is a Monitor for Claymore. It is fully responsive, as well
 * Fully responsive
 * Comes with Bootstrap grid system
 * Use Web server like Apache.
-* You have tu use an IP and PORT valids with a real Claymore working. 
+* You have to use an IP and PORT valids with a real Claymore working. 
