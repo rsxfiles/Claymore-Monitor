@@ -22,7 +22,6 @@ if(!($sock))
 }
 
 //Connect socket to remote server
-//if(!socket_connect($sock, '74.130.36.226', 3333))
 if(!socket_connect($sock, $ip, $port))
 {
     $errorcode = socket_last_error();
